@@ -1,9 +1,11 @@
 {
   "devDependencies": {
-    "@tsconfig/node23": "^23.0.0"
+    "@tsconfig/node23": "^23.0.0",
+    "prisma": "^6.5.0"
   },
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^6.5.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.10",
     "dotenv": "^16.4.7",
