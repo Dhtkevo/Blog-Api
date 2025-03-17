@@ -88,3 +88,47 @@ export const deleteComment = async (commentid: number) => {
 };
 
 // User Queries
+export const getAllUsers = async () => {
+  const allUsers = await prisma.user.findMany();
+  return allUsers;
+};
+
+export const getSpecificUser = async (userid: number) => {
+  const user = await prisma.user.findUnique({ where: { id: userid } });
+  return user;
+};
+
+export const createUser = async (
+  username: string,
+  password: string,
+  isadmin: boolean = false
+) => {
+  await prisma.user.create({
+    data: {
+      username: username,
+      password: password,
+      isAdmin: isadmin,
+    },
+  });
+};
+
+export const updateUser = async (
+  username: string,
+  password: string,
+  isadmin: boolean = false
+) => {
+  await prisma.user.update({
+    where: {
+      username: username,
+    },
+    data: {
+      username: username,
+      password: password,
+      isAdmin: isadmin,
+    },
+  });
+};
+
+export const deleteUser = async (userid: number) => {
+  await prisma.user.delete({ where: { id: userid } });
+};
