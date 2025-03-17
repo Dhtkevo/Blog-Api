@@ -1,23 +1,16 @@
 import express from "express";
+import { commentRouter } from "./commentsRouter.js";
 
 export const postRouter = express.Router();
+
+postRouter.use("/:postid/comments", commentRouter);
 
 postRouter.get("/");
 
 postRouter.get("/:postid");
 
-postRouter.get("/:postid/comments");
-
-postRouter.get("/:postid/comments/:commentid");
-
 postRouter.post("/");
-
-postRouter.post("/:postid/comments");
 
 postRouter.put("/:postid");
 
-postRouter.put("/:postid/comments/:commentid");
-
 postRouter.delete("/:postid");
-
-postRouter.delete("/:postid/comments/:commentid");
