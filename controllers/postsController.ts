@@ -14,24 +14,24 @@ export const getPosts = async (req: Request, res: Response) => {
 };
 
 export const getPostsId = async (req: Request, res: Response) => {
-  const postid = Number(req.body.postid);
+  const { postid } = req.params;
 
-  const post = await getSpecificPost(postid);
+  const post = await getSpecificPost(Number(postid));
   res.json(post);
 };
 
 export const newPost = async (req: Request, res: Response) => {
   const title = req.body.title;
   const content = req.body.content;
-  const userid = Number(req.body.userid);
+  const userid = req.body.userid;
 
-  const createdPost = await createPost(title, content, userid);
+  const createdPost = await createPost(title, content, Number(userid));
 
   res.json({ message: "Post Created Sucessfully", post: createdPost });
 };
 
 export const updatePostPut = async (req: Request, res: Response) => {
-  const { postid } = req.body;
+  const { postid } = req.params;
   const { title } = req.body;
   const { content } = req.body;
 
@@ -41,7 +41,7 @@ export const updatePostPut = async (req: Request, res: Response) => {
 };
 
 export const deletePostController = async (req: Request, res: Response) => {
-  const { postid } = req.body;
+  const { postid } = req.params;
   await deletePost(Number(postid));
   res.json({ message: "Post Delete Sucessfully" });
 };

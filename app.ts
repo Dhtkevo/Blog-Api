@@ -8,14 +8,14 @@ import { userRouter } from "./routes/userRouter.js";
 const app = express();
 
 app.options("*", cors());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "HELLO" });
 });
-
-app.get("/posts", postRouter);
-app.get("/comments", commentRouter);
-app.get("/users", userRouter);
+app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
+app.use("/users", userRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

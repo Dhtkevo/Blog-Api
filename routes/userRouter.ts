@@ -1,9 +1,16 @@
 import express from "express";
+import {
+  deleteUserController,
+  getUsers,
+  getUsersId,
+  newUser,
+  updateUserController,
+} from "../controllers/usersController.js";
 
 export const userRouter = express.Router();
 
-userRouter.get("/");
-userRouter.get("/:userid");
-userRouter.post("/");
-userRouter.put("/:userid");
-userRouter.delete("/:userid");
+userRouter.get("/", getUsers);
+userRouter.get("/:userid", getUsersId);
+userRouter.post("/", newUser);
+userRouter.put("/:userid", updateUserController);
+userRouter.delete("/:userid", deleteUserController);

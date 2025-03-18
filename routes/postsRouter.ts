@@ -1,6 +1,12 @@
 import express from "express";
 import { commentRouter } from "./commentsRouter.js";
-import { getPosts } from "../controllers/postsController.js";
+import {
+  deletePostController,
+  getPosts,
+  getPostsId,
+  newPost,
+  updatePostPut,
+} from "../controllers/postsController.js";
 
 export const postRouter = express.Router();
 
@@ -8,10 +14,10 @@ postRouter.use("/:postid/comments", commentRouter);
 
 postRouter.get("/", getPosts);
 
-postRouter.get("/:postid");
+postRouter.get("/:postid", getPostsId);
 
-postRouter.post("/");
+postRouter.post("/", newPost);
 
-postRouter.put("/:postid");
+postRouter.put("/:postid", updatePostPut);
 
-postRouter.delete("/:postid");
+postRouter.delete("/:postid", deletePostController);
