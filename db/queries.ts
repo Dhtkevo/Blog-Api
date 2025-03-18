@@ -16,13 +16,15 @@ export const createPost = async (
   content: string,
   userid: number
 ) => {
-  await prisma.post.create({
+  const createdPost = await prisma.post.create({
     data: {
       title: title,
       content: content,
       userId: userid,
     },
   });
+
+  return createdPost;
 };
 
 export const updatePost = async (
@@ -30,7 +32,7 @@ export const updatePost = async (
   title: string,
   content: string
 ) => {
-  await prisma.post.update({
+  const updatedPost = await prisma.post.update({
     where: {
       id: postid,
     },
@@ -39,6 +41,8 @@ export const updatePost = async (
       content: content,
     },
   });
+
+  return updatedPost;
 };
 
 export const deletePost = async (postid: number) => {
@@ -59,12 +63,14 @@ export const getSpecificComment = async (commentid: number) => {
 };
 
 export const createComment = async (content: string, postid: number) => {
-  await prisma.comment.create({
+  const createdComment = await prisma.comment.create({
     data: {
       content: content,
       postId: postid,
     },
   });
+
+  return createdComment;
 };
 
 export const updateComment = async (
@@ -72,7 +78,7 @@ export const updateComment = async (
   content: string,
   postid: number
 ) => {
-  await prisma.comment.update({
+  const updatedComment = await prisma.comment.update({
     where: {
       id: commentid,
     },
@@ -81,6 +87,8 @@ export const updateComment = async (
       postId: postid,
     },
   });
+
+  return updatedComment;
 };
 
 export const deleteComment = async (commentid: number) => {
@@ -103,13 +111,15 @@ export const createUser = async (
   password: string,
   isadmin: boolean = false
 ) => {
-  await prisma.user.create({
+  const createdUser = await prisma.user.create({
     data: {
       username: username,
       password: password,
       isAdmin: isadmin,
     },
   });
+
+  return createdUser;
 };
 
 export const updateUser = async (
@@ -117,7 +127,7 @@ export const updateUser = async (
   password: string,
   isadmin: boolean = false
 ) => {
-  await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: {
       username: username,
     },
@@ -127,6 +137,8 @@ export const updateUser = async (
       isAdmin: isadmin,
     },
   });
+
+  return updatedUser;
 };
 
 export const deleteUser = async (userid: number) => {
