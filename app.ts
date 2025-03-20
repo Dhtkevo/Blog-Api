@@ -4,6 +4,7 @@ import cors from "cors";
 import { postRouter } from "./routes/postsRouter.js";
 import { commentRouter } from "./routes/commentsRouter.js";
 import { userRouter } from "./routes/userRouter.js";
+import { authRouter } from "./routes/authRouter.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/users", userRouter);
+app.use("/auth", authRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

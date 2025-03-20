@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import {
-  createUser,
   deleteUser,
   getAllUsers,
   getSpecificUser,
@@ -16,12 +15,6 @@ export const getUsersId = async (req: Request, res: Response) => {
   const { userid } = req.params;
   const user = await getSpecificUser(Number(userid));
   res.json(user);
-};
-
-export const newUser = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-  const createdUser = await createUser(username, password);
-  res.json({ message: "User Created Succeessfully", createdUser });
 };
 
 export const updateUserController = async (req: Request, res: Response) => {
