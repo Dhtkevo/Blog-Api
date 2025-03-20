@@ -106,6 +106,11 @@ export const getSpecificUser = async (userid: number) => {
   return user;
 };
 
+export const getSpecificUserUsername = async (username: string) => {
+  const user = await prisma.user.findUnique({ where: { username: username } });
+  return user;
+};
+
 export const createUser = async (
   username: string,
   password: string,

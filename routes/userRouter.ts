@@ -7,10 +7,25 @@ import {
   updateUserController,
 } from "../controllers/usersController.js";
 
+import passport from "passport";
+import "../auth/passport.js";
+
 export const userRouter = express.Router();
 
-userRouter.get("/", getUsers);
-userRouter.get("/:userid", getUsersId);
+userRouter.get("/", passport.authenticate("jwt", { session: false }), getUsers);
+userRouter.get(
+  "/:userid",
+  passport.authenticate("jwt", { session: false }),
+  getUsersId
+);
 userRouter.post("/", registerUser);
-userRouter.put("/:userid", updateUserController);
-userRouter.delete("/:userid", deleteUserController);
+userRouter.put(
+  "/:userid",
+  passport.authenticate("jwt", { session: false }),
+  updateUserController
+);
+userRouter.delete(
+  "/:userid",
+  passport.authenticate("jwt", { session: false }),
+  deleteUserController
+);
