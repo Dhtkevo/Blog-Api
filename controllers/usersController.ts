@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import {
+  createUser,
   deleteUser,
   getAllUsers,
   getSpecificUser,
   updateUser,
 } from "../db/queries.js";
+import bcrypt from "bcryptjs";
 
 export const getUsers = async (req: Request, res: Response) => {
   const allUsers = await getAllUsers();
@@ -15,6 +17,15 @@ export const getUsersId = async (req: Request, res: Response) => {
   const { userid } = req.params;
   const user = await getSpecificUser(Number(userid));
   res.json(user);
+};
+
+export const registerUser = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const createdUser = await createUser(username, hashedPassword);
+  res.json({ message: "User Created Succeessfully", createdUser });
 };
 
 export const updateUserController = async (req: Request, res: Response) => {
