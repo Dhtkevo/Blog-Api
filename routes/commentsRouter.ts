@@ -7,6 +7,9 @@ import {
   updateCommentController,
 } from "../controllers/commentsController.js";
 
+import passport from "passport";
+import "../auth/passport.js";
+
 export const commentRouter = express.Router({ mergeParams: true });
 
 commentRouter.get("/", getComments);
@@ -15,6 +18,14 @@ commentRouter.get("/:commentid", getCommentsId);
 
 commentRouter.post("/", newComment);
 
-commentRouter.put("/:commentid", updateCommentController);
+commentRouter.put(
+  "/:commentid",
+  passport.authenticate("jwt", { session: false }),
+  updateCommentController
+);
 
-commentRouter.delete("/:commentid", deleteCommentController);
+commentRouter.delete(
+  "/:commentid",
+  passport.authenticate("jwt", { session: false }),
+  deleteCommentController
+);

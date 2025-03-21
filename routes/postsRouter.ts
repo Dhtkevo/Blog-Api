@@ -8,6 +8,9 @@ import {
   updatePostPut,
 } from "../controllers/postsController.js";
 
+import passport from "passport";
+import "../auth/passport.js";
+
 export const postRouter = express.Router();
 
 postRouter.use("/:postid/comments", commentRouter);
@@ -16,8 +19,16 @@ postRouter.get("/", getPosts);
 
 postRouter.get("/:postid", getPostsId);
 
-postRouter.post("/", newPost);
+postRouter.post("/", passport.authenticate("jwt", { session: false }), newPost);
 
-postRouter.put("/:postid", updatePostPut);
+postRouter.put(
+  "/:postid",
+  passport.authenticate("jwt", { session: false }),
+  updatePostPut
+);
 
-postRouter.delete("/:postid", deletePostController);
+postRouter.delete(
+  "/:postid",
+  passport.authenticate("jwt", { session: false }),
+  deletePostController
+);
