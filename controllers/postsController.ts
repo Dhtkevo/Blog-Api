@@ -23,9 +23,9 @@ export const getPostsId = async (req: Request, res: Response) => {
 export const newPost = async (req: Request, res: Response) => {
   const title = req.body.title;
   const content = req.body.content;
-  const userid = req.body.userid;
+  const userid = 6;
 
-  const createdPost = await createPost(title, content, Number(userid));
+  const createdPost = await createPost(title, content, userid);
 
   res.json({ message: "Post Created Sucessfully", post: createdPost });
 };
