@@ -8,7 +8,7 @@ import { authRouter } from "./routes/authRouter.js";
 
 const app = express();
 
-app.options("*", cors());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
