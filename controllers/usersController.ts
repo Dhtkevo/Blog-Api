@@ -30,11 +30,12 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const updateUserController = async (req: Request, res: Response) => {
   let { username, password, isadmin } = req.body;
+  let hashedPassword = await bcrypt.hash(password, 10);
 
   // Convert isadmin to boolean value if provided, else set it as false
   isadmin ? (isadmin = Boolean(isadmin)) : (isadmin = false);
 
-  const updatedUser = await updateUser(username, password, isadmin);
+  const updatedUser = await updateUser(username, hashedPassword, isadmin);
   res.json({ message: "User updated successfully", user: updatedUser });
 };
 
