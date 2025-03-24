@@ -30,5 +30,9 @@ export const LoginUser = async (req: Request, res: Response) => {
     expiresIn: "1d",
   });
 
-  res.status(200).json({ message: "User logged in", accessToken: accessToken });
+  res.status(200).json({
+    message: "User logged in",
+    accessToken: accessToken,
+    user: user,
+  });
 };
